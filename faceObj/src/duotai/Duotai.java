@@ -10,7 +10,7 @@ public class Duotai {
         p.run(); // 应该打印Person.run还是Student.run?
         //解：Java的实例方法调用是基于运行时的实际类型的动态调用，
         // 而非变量的声明类型。故Student.run
-        System.out.println(p);
+        System.out.println("kjl       "+p);
 
         System.out.println(p.toString());
         System.out.println(p.getClass().getName() + '@' + Integer.toHexString(p.hashCode())+p.hashCode());

@@ -2,7 +2,14 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.math.BigInteger;
 
+/**
+ * 小结
+ * BigInteger用于表示任意大小的整数；
+ * BigInteger是不变类，并且继承自Number；
+ * 将BigInteger转换成基本类型时可使用longValueExact()等方法保证结果准确。
+ */
 public class ATest {
     public static void main(String[] args) throws IntrospectionException {
         {//代码块，s只在花括号类起作用
@@ -51,12 +58,21 @@ public class ATest {
             System.out.println(x1);
             System.out.println(x2);
         }
-
-        BeanInfo info = Introspector.getBeanInfo(Person.class);
-        for (PropertyDescriptor pd : info.getPropertyDescriptors()) {
-            System.out.println(pd.getName());
-            System.out.println("  " + pd.getReadMethod());
-            System.out.println("  " + pd.getWriteMethod());
+        System.out.println("****************");
+        {
+            BeanInfo info = Introspector.getBeanInfo(Person.class);
+            for (PropertyDescriptor pd : info.getPropertyDescriptors()) {
+                System.out.println(pd.getName());
+                System.out.println("  " + pd.getReadMethod());
+                System.out.println("  " + pd.getWriteMethod());
+            }
+        }
+        {
+            BigInteger i1 = new BigInteger("123456789000");
+            BigInteger i2 = new BigInteger("12345678901234567890");
+            System.out.println(i1.longValue()); // 123456789000
+            //System.out.println(i1.multiply(i1).longValueExact());
+            // java.lang.ArithmeticException: BigInteger out of long range
         }
     }
 }

@@ -2,7 +2,9 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 
 /**
  * 小结
@@ -52,6 +54,7 @@ public class ATest {
             System.out.println(adder.value());
         }
         {
+            //包装类型 https://www.liaoxuefeng.com/wiki/1252599548343744/1260473794166400
             System.out.println("最常用的静态方法parseInt()可以把字符串解析成一个整数：");
             int x1 = Integer.parseInt("100"); // 100
             int x2 = Integer.parseInt("100", 16); // 256,因为按16进制解析
@@ -60,6 +63,11 @@ public class ATest {
         }
         System.out.println("****************");
         {
+            /**
+             * JavaBean的作用
+             * JavaBean主要用来传递数据，即把一组数据组合成一个JavaBean便于传输。
+             * 此外，JavaBean可以方便地被IDE工具分析，生成读写属性的代码，主要用在图形界面的可视化设计中。
+             */
             BeanInfo info = Introspector.getBeanInfo(Person.class);
             for (PropertyDescriptor pd : info.getPropertyDescriptors()) {
                 System.out.println(pd.getName());
@@ -67,13 +75,53 @@ public class ATest {
                 System.out.println("  " + pd.getWriteMethod());
             }
         }
+        System.out.println("---------------------------------------------");
         {
+            /**
+             * BigInteger用于表示任意大小的整数；
+             * BigInteger是不变类，并且继承自Number；
+             * 将BigInteger转换成基本类型时可使用longValueExact()等方法保证结果准确。
+             */
             BigInteger i1 = new BigInteger("123456789000");
             BigInteger i2 = new BigInteger("12345678901234567890");
             System.out.println(i1.longValue()); // 123456789000
             //System.out.println(i1.multiply(i1).longValueExact());
             // java.lang.ArithmeticException: BigInteger out of long range
         }
+        System.out.println("---------------------------------------------");
+        {
+            BigDecimal d1 = new BigDecimal("123.4500");
+            BigDecimal d2 = d1.stripTrailingZeros();
+            System.out.println(d1.scale()); // 4
+            System.out.println(d2.scale()); // 2,因为去掉了00
+            BigDecimal d3 = new BigDecimal("1234500");
+            BigDecimal d4 = d3.stripTrailingZeros();
+            System.out.println(d3.scale()); // 0
+            System.out.println(d4.scale()); // -2
+            BigDecimal d5 = new BigDecimal("123.456");
+            BigDecimal d6 = new BigDecimal("23.456789");
+            BigDecimal d7 = d1.divide(d2, 10, RoundingMode.HALF_UP); // 保留10位小数并四舍五入
+            System.out.println(d7);
+            //BigDecimal d4 = d1.divide(d2); // 报错：ArithmeticException，因为除不尽
+            System.out.println("---------------------------------------------");
+            //还可以对BigDecimal做除法的同时求余数：
+            BigDecimal n = new BigDecimal("12.345");
+            BigDecimal m = new BigDecimal("0.12");
+            BigDecimal[] dr = n.divideAndRemainder(m);
+            System.out.println(dr[0]); // 102
+            System.out.println(dr[1]); // 0.105
+            //调用divideAndRemainder()方法时，返回的数组包含两个BigDecimal，
+            // 分别是商和余数，其中商总是整数，余数不会大于除数。
+            // 我们可以利用这个方法判断两个BigDecimal是否是整数倍数：
+            BigDecimal n1 = new BigDecimal("12.75");
+            BigDecimal m1 = new BigDecimal("0.15");
+            BigDecimal[] dr1 = n1.divideAndRemainder(m1);
+            if (dr1[1].signum() == 0) {
+                System.out.println("n是m的整数倍");
+            }
+        }
+        System.out.println("---------------------------------------------");
+        //!!!!比较BigDecimal
     }
 }
 

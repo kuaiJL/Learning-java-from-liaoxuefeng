@@ -1,4 +1,4 @@
-package Record_;
+package CoreClass.Record_;
 
 /**
  * 从Java 14开始，提供新的record关键字，可以非常方便地定义Data Class：

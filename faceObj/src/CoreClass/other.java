@@ -1,3 +1,5 @@
+package CoreClass;
+
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -5,6 +7,9 @@ import java.beans.PropertyDescriptor;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Arrays;
 
 /**
  * 小结
@@ -12,7 +17,7 @@ import java.math.RoundingMode;
  * BigInteger是不变类，并且继承自Number；
  * 将BigInteger转换成基本类型时可使用longValueExact()等方法保证结果准确。
  */
-public class ATest {
+public class other {
     public static void main(String[] args) throws IntrospectionException {
         {//代码块，s只在花括号类起作用
             String s = "";
@@ -137,26 +142,37 @@ public class ATest {
             System.out.println(d1.equals(d2.stripTrailingZeros())); // true,因为d2去除尾部0后scale变为2
             System.out.println(d1.compareTo(d2)); // 0
         }
+
+        SecureRandom sr = null;
+        try {
+            sr = SecureRandom.getInstanceStrong(); // 获取高强度安全随机数生成器
+        } catch (NoSuchAlgorithmException e) {
+            sr = new SecureRandom(); // 获取普通的安全随机数生成器
+        }
+        byte[] buffer = new byte[16];
+        sr.nextBytes(buffer); // 用安全随机数填充buffer
+        System.out.println(Arrays.toString(buffer));
     }
 }
-    //仿照StringBuilder，我们也可以设计支持链式操作的类。例如，一个可以不断增加的计数器：
-    class Adder {
-        private int sum = 0;
-        public Adder(int sum) {
-            this.sum = sum;
-        }
-        public Adder add(int n) {
-            sum += n;
-            return this;
-        }
-        public Adder inc() {
-            sum++;
-            return this;
-        }
-        public int value() {
-            return sum;
-        }
+
+//仿照StringBuilder，我们也可以设计支持链式操作的类。例如，一个可以不断增加的计数器：
+class Adder {
+    private int sum = 0;
+    public Adder(int sum) {
+        this.sum = sum;
     }
+    public Adder add(int n) {
+        sum += n;
+        return this;
+    }
+    public Adder inc() {
+        sum++;
+        return this;
+    }
+    public int value() {
+        return sum;
+    }
+}
 
     class Person {
         private String name;

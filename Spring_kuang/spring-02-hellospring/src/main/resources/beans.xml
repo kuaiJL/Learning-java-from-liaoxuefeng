@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--使用Spring来创建对象，在Spring这些都称为Bean
+        类型 变量名 = new 类型();
+        Hello hello = new HeLlo();
+        id = 变量名
+        class = new 的对象;
+        property相当干给对象中的国性设置一个值!
+    -->
+
+    <bean id="hello" class="com.kuai.pojo.Hello">
+        <property name="str" value="Spring-rafa"/>
+    </bean>
+    <!--
+    beans就是容器。
+    ●Hello 对象是谁创建的?
+        hello对象是由Spring创建的
+    ●Hello 对象的属性是怎么设置的?
+        hello对象的属性是由Spring容器设置的，
+    这个过程就叫控制反转:
+    控制:谁来控制对象的创建，传统应用程序的对象是由程序本身控制创建的，使用Spring后，对象是由Spring来创建的.
+    反转:程序本身不创建对象,而变成被动的接收对象.
+    依赖注入:就是利用set方法来进行注入的.
+    IOC是一种编程思想，由主动的编程变成被动的接收.
+    可以通过newClassPathXmlApplicationContext去浏览一下底层源码 .
+
+    OK ,到了现在，我们彻底不用再程序中去改动了，要实现不同的操作，只需要在xml配置文件中进行
+    修改，所谓的IoC,- -句话搞定:对象由Spring来创建，管理，装配!
+
+    -->
+</beans>

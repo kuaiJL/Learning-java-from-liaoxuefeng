@@ -15,8 +15,8 @@ public class Proxy_newProxyInstance {
         InvocationHandler handler = new InvocationHandler() {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                System.out.println(proxy.getClass());
-                System.out.println(method);
+                //System.out.println("2-------"+proxy);//proxy就是hello，一直回调proxy.toString，即hello。toString
+                System.out.println("method====="+method);
                 if (method.getName().equals("morning")){
                     System.out.println("Good morning,"+args[0]);
                 }
@@ -26,6 +26,7 @@ public class Proxy_newProxyInstance {
         Hello hello = (Hello) Proxy.newProxyInstance(Hello.class.getClassLoader(),// 传入ClassLoader
                 new Class[]{Hello.class},   // 传入要实现的接口
                 handler); // 传入处理调用方法的InvocationHandler
+        //System.out.println("1------"+hello);
         hello.morning("Bob");
         System.out.println(Hello.class);
     }

@@ -1,4 +1,4 @@
-package Thread_.synchronized_;
+package m_Thread_.synchronized_;
 
 public class FromBook {
     static boolean started = false;

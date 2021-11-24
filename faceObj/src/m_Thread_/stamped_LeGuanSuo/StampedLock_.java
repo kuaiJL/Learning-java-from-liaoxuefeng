@@ -1,5 +1,7 @@
 package m_Thread_.stamped_LeGuanSuo;
 
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.StampedLock;
 
 /**
@@ -12,7 +14,7 @@ import java.util.concurrent.locks.StampedLock;
  */
 public class StampedLock_ {
     public static void main(String[] args) {
-
+        System.out.println("没有使用");
     }
 }
 

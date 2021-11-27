@@ -1,4 +1,4 @@
-package Lambda.One;
+package Z_Lambda.One;
 
 import java.util.Arrays;
 import java.util.Comparator;

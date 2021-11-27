@@ -1,4 +1,4 @@
-package Z_jdbc.one;
+package q_jdbc.one;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

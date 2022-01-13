@@ -22,6 +22,7 @@ public class GenerateTokenDemo {
         //自然排序
         Collections.sort(tokenParams);
         //生成token 签名
+        System.out.println(tokenParams.toString());
         String tokenSignature = MD5.MD5Encode(tokenParams.toString());
         System.out.println(tokenSignature);
     }
